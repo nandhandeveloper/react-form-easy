@@ -14,7 +14,7 @@ const OnInputChangeHandler = (event, anyForm, setAnyForm) => {
 
     fieldObj.errors = InputTextValidations(validations, typeof value === 'string' ? value.trim(): value);
     fieldObj.isValid = fieldObj.errors.length === 0;
-    console.log(fieldObj);
+    // console.log(fieldObj);
     copyAnyForm[inputField] = fieldObj;
     
     setAnyForm(copyAnyForm);

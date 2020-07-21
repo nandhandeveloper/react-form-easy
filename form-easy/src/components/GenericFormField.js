@@ -1,8 +1,10 @@
 import React from 'react';
-import { InputLabel, FormLabel, RadioGroup,Radio, Select, MenuItem, FormHelperText, FormControl, Checkbox, FormControlLabel, TextField, } from '@material-ui/core';
+import { InputLabel, InputAdornment, IconButton, FormLabel, RadioGroup, Radio, Select, MenuItem, FormHelperText, FormControl, Checkbox, FormControlLabel, TextField, } from '@material-ui/core';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 
-const GenericFormField = ({ controlDetails, onInputChangeHandler }) => {
-    const { name, type, isTouched, errors, isValid, label, value, options, row, radios } = controlDetails;
+const GenericFormField = ({ controlDetails, onInputChangeHandler, handleClickShowPassword, handleMouseDownPassword }) => {
+    const { name, type, isTouched, rows, showPassword, errors, isValid, multiline, label, value, options, row, radios } = controlDetails;
     let formELement = null;
     switch (type) {
         case 'select':
@@ -58,6 +60,36 @@ const GenericFormField = ({ controlDetails, onInputChangeHandler }) => {
                     errors.map((err, i) => <FormHelperText error={true} key={i}>{err}</FormHelperText>)}
             </FormControl>);
             break;
+        case 'showpassword':
+            formELement = (<FormControl margin="dense" fullWidth>
+                <TextField
+                    error={isTouched && !isValid}
+                    id={name}
+                    multiline={multiline}
+                    rows={rows}
+                    label={label}
+                    name={name}
+                    onChange={e => onInputChangeHandler(e)}
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">
+                            <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={()=>handleClickShowPassword(name)}
+                                onMouseDown={handleMouseDownPassword}
+                            >
+                                {showPassword ? <Visibility /> : <VisibilityOff />}
+                            </IconButton>
+                        </InputAdornment>
+                    }}
+
+                    value={value}
+                    type={showPassword ? 'text' : 'password'}
+                />
+                {isTouched &&
+                    !isValid &&
+                    errors.map((err, i) => <FormHelperText error={true} key={i}>{err}</FormHelperText>)}
+            </FormControl>);
+            break;
         case 'password':
         case 'email':
         default:
@@ -65,6 +97,8 @@ const GenericFormField = ({ controlDetails, onInputChangeHandler }) => {
                 <TextField
                     error={isTouched && !isValid}
                     id={name}
+                    multiline={multiline}
+                    rows={rows}
                     label={label}
                     name={name}
                     onChange={e => onInputChangeHandler(e)}

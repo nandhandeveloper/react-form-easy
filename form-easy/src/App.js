@@ -3,6 +3,7 @@ import { Grid, Typography, makeStyles, Button, } from '@material-ui/core';
 import FormDate from './formdata/FormData';
 import GenericFormField from './components/GenericFormField';
 import onInputChangeHandler from './common/OnInputChangeHandler';
+import onShowPasswordClicked from './common/onShowPasswordClicked';
 
 const useStyles = makeStyles((theme) => ({
   outerBox: {
@@ -28,13 +29,19 @@ function App() {
 
   useEffect(() => {
     const isFormValid = Object.values(customForm).every(field => field.isValid);
-    console.log(isFormValid);
     setCustomFormValid(isFormValid);
   }, [customForm]);
 
   const inputChangeHandler = (event) => {
     onInputChangeHandler(event, customForm, setCustomForm);
   }
+  const handleClickShowPassword = (name) => {
+    onShowPasswordClicked(name,customForm, setCustomForm );
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
 
   return (
     <section className={classes.outerBox}>
@@ -44,7 +51,7 @@ function App() {
       <Grid container className={classes.innerbox}>
         <Grid item xs={false} sm={3}></Grid>
         <Grid item xs={12} sm={6}>
-          {Object.values(customForm).map(formField => <GenericFormField key={formField.name} controlDetails={formField} onInputChangeHandler={inputChangeHandler} />)}
+          {Object.values(customForm).map(formField => <GenericFormField key={formField.name} controlDetails={formField} onInputChangeHandler={inputChangeHandler} handleClickShowPassword={handleClickShowPassword} handleMouseDownPassword={handleMouseDownPassword}  />)}
           <div className={classes.buttons}>
             <Button type="submit" variant="contained" color="secondary" disabled={!customFormValid}>Register</Button>
           </div>
