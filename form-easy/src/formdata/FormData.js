@@ -165,6 +165,59 @@ const FormData = {
         },
         errors: [],
     },
+    ratings: {
+        name: 'ratings',
+        value: '',
+        type: 'customradio',
+        radios: [
+            {
+                id: 1,
+                value: '4.5',
+                label: {
+                    type: 'rating',
+                    name: '4.5 & above',
+                    value: 4.5,
+                }
+            },
+            {
+                id: 2,
+                value: '4',
+                label: {
+                    type: 'rating',
+                    name: '4 & above',
+                    value: 4,
+                }
+            },
+            {
+                id: 3,
+                value: '3.5',
+                label: {
+                    type: 'rating',
+                    name: '3.5 & above',
+                    value: 3.5,
+                }
+            },
+            {
+                id: 4,
+                value: '3',
+                label: {
+                    type: 'rating',
+                    name: '3 & above',
+                    value: 3,
+                }
+            }
+        ],
+        label: 'Ratings*',
+        isValid: true,
+        isTouched: false,
+        validations: {
+            required: {
+                value: true,
+                error: 'This is a required field',
+            }
+        },
+        errors: [],
+    },
     gender2: {
         name: 'gender2',
         value: '',
@@ -213,10 +266,35 @@ const FormData = {
         name: 'notrequiredchecbox',
         value: false,
         type: 'checkbox',
-        label: 'Not requred checkBox.',
+        label: 'Not required checkBox.',
         isValid: true,
         isTouched: false,
         validations: {
+        },
+        errors: [],
+    },
+    price: {
+        name: 'price',
+        type: 'groupcheckbox',
+        label: 'Price',
+        isValid: true,
+        isTouched: false,
+        checkBoxControls: {
+            paid: {
+                id: 1,
+                value: false,
+                name: 'price>paid',
+                label: 'Paid'
+            },
+            free: {
+                id: 2,
+                value: false,
+                name: 'price>free',
+                label: 'Free'
+            }
+        },
+        validations: {
+
         },
         errors: [],
     }

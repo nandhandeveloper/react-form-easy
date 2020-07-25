@@ -1,20 +1,31 @@
 import InputTextValidations from './InputTextValidation';
 const OnInputChangeHandler = (event, anyForm, setAnyForm) => {
     
-    const inputField = event.target.name;
+    let inputField = event.target.name;
     const inputType = event.target.type;
     const value = inputType === 'checkbox' ? event.target.checked : event.target.value;
 
-    const copyAnyForm = JSON.parse(JSON.stringify(anyForm));
+    console.log(inputField);
+    console.log(inputType);
+    console.log(value);
 
-    const fieldObj = copyAnyForm[inputField];
+    const copyAnyForm = JSON.parse(JSON.stringify(anyForm));
+    let fieldObj = null;
+
+    if(inputType === 'checkbox' && /[>]/.test(inputField)){
+        const [parentName, childName] = inputField.split('>');
+        inputField = parentName;
+        fieldObj = copyAnyForm[parentName];
+        fieldObj.checkBoxControls[childName].value = value;
+    } else {
+        fieldObj = copyAnyForm[inputField];
+        fieldObj.value = value;
+    }
+    
     const { validations } = fieldObj;
     fieldObj.isTouched = true;
-    fieldObj.value = value;
-
     fieldObj.errors = InputTextValidations(validations, typeof value === 'string' ? value.trim(): value);
     fieldObj.isValid = fieldObj.errors.length === 0;
-    // console.log(fieldObj);
     copyAnyForm[inputField] = fieldObj;
     
     setAnyForm(copyAnyForm);

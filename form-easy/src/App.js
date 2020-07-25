@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
   innerbox: {
     marginTop: theme.spacing(4),
+    padding:theme.spacing(2)
   },
   buttons: {
     display: 'flex',
