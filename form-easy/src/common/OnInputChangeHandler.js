@@ -1,4 +1,6 @@
 import InputTextValidations from './InputTextValidation';
+import InputStrengthValidation from './InputStrengthValidation';
+
 const OnInputChangeHandler = (event, anyForm, setAnyForm) => {
     
     let inputField = event.target.name;
@@ -22,10 +24,13 @@ const OnInputChangeHandler = (event, anyForm, setAnyForm) => {
         fieldObj.value = value;
     }
     
-    const { validations } = fieldObj;
+    const { validations, strength } = fieldObj;
     fieldObj.isTouched = true;
     fieldObj.errors = InputTextValidations(validations, typeof value === 'string' ? value.trim(): value);
     fieldObj.isValid = fieldObj.errors.length === 0;
+    if(strength){
+        fieldObj.strength = InputStrengthValidation(strength, typeof value === 'string' ? value.trim(): value);
+    }
     copyAnyForm[inputField] = fieldObj;
     
     setAnyForm(copyAnyForm);

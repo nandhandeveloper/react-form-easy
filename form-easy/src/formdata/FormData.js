@@ -80,7 +80,7 @@ const FormData = {
             },
             minlength: {
                 value: 6,
-                error: 'A valid password is required'
+                error: 'Atleast 6 characters are required'
             }
         },
         errors: [],
@@ -101,7 +101,86 @@ const FormData = {
             },
             minlength: {
                 value: 6,
-                error: 'A valid password is required'
+                error: 'Atleast 6 characters are required'
+            }
+        },
+        errors: [],
+    },
+    strengthPassword :{
+        name: 'strengthPassword',
+        value: '',
+        type: 'strengthPassword',
+        label: 'Strength Password*',
+        isValid: false,
+        multiline: false,
+        isTouched: false,
+        validations: {
+            required: {
+                value: true,
+                error: 'This is a required field'
+            },
+            minlength: {
+                value: 6,
+                error: 'Atleast 6 characters are required'
+            }
+        },
+        strength: {
+            number: {
+                regEx: "[0-9]",
+                isValid: false
+            },
+            lowercaseChar: {
+                regEx: "[a-z]",
+                isValid: false
+            },
+            upercaseChar: {
+                regEx: "[A-Z]",
+                isValid: false
+                
+            },
+            specialCharc: {
+                regEx: "[\\W|_]",
+                isValid: false                
+            }
+        },
+        errors: [],
+    },
+    showAndStrengthpassword: {
+        name: 'showAndStrengthpassword',
+        value: '',
+        type: 'showAndStrengthpassword',
+        label: 'Show And Strength Password*',
+        isValid: false,
+        multiline: false,
+        isTouched: false,
+        showPassword: false,
+        validations: {
+            required: {
+                value: true,
+                error: 'This is a required field'
+            },
+            minlength: {
+                value: 6,
+                error: 'Atleast 6 characters are required'
+            }
+        },
+        strength: {
+            number: {
+                regEx: "[0-9]",
+                isValid: false
+            },
+            lowercaseChar: {
+                regEx: "[a-z]",
+                isValid: false
+            },
+            upercaseChar: {
+                regEx: "[A-Z]",
+                isValid: false
+                
+            },
+            specialCharc: {
+                regEx: "[\\W|_]",
+                isValid: false                
             }
         },
         errors: [],
